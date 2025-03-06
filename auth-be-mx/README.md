@@ -49,3 +49,4 @@ pnpm create next-app@latest auth-be-mx --typescript --eslint --src-dir --turbopa
 5. [Get Started with Drizzle and SQLite](https://orm.drizzle.team/docs/get-started/sqlite-new)
 6. [Guide to app architecture](https://developer.android.com/topic/architecture)
 7. [How to Hash Passwords with bcrypt in Node.js](https://www.freecodecamp.org/news/how-to-hash-passwords-with-bcrypt-in-nodejs/)
+8. [How to use JSON Web Token (JWT) in Node.js](https://codedamn.com/news/nodejs/use-json-web-token-jwt-in-nodejs)

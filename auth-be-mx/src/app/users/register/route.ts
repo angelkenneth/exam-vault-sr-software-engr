@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getJson } from '@/lib/shared/get-json';
-import { PublicUser, GenericUserInput, User } from '@/app/users/_local/user';
+import { PublicUser, GenericUserInput } from '@/app/users/_local/user';
 import { wrapHandler } from '@/lib/shared/wrap-handler';
 import { signInInputSchema } from '@/app/users/_validation/sign-in-input';
 import { dataOrThrow } from '@/lib/shared/data-or-throw';
@@ -8,6 +8,7 @@ import { getUserByUsername } from '@/app/users/_database/get-by-username';
 import { hashPassword } from '@/app/users/_local/hash-password';
 import { createUser } from '@/app/users/_database/create';
 import { respondWithJwt } from '@/app/users/_local/respond-w-jwt';
+import { getConfig } from '@/app/config/_database/get-config';
 
 export const POST = wrapHandler<GenericUserInput, PublicUser>(
   async (request: NextRequest) => {
@@ -25,6 +26,7 @@ export const POST = wrapHandler<GenericUserInput, PublicUser>(
       username,
       password: hashedPassword,
     });
-    return respondWithJwt(createdUser);
+    const config = await getConfig();
+    return respondWithJwt(config.secretKey, createdUser);
   }
 );

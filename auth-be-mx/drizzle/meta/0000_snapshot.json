@@ -1,9 +1,26 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "b2c9f481-ebb0-45a8-80cc-eea1e07639c6",
+  "id": "7ccbddb1-b892-4b42-9345-bd62a9bad13e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
+    "config_table": {
+      "name": "config_table",
+      "columns": {
+        "secretKey": {
+          "name": "secretKey",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
     "users_table": {
       "name": "users_table",
       "columns": {

@@ -1,3 +1,7 @@
+CREATE TABLE `config_table` (
+	`secretKey` text NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE `users_table` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`username` text NOT NULL,
