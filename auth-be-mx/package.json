@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "format": "prettier --check .",
-    "format:fix": "prettier --check . || (prettier --write . && exit 1)"
+    "format:fix": "prettier --check . || (prettier --write . && exit 1)",
+    "test": "vitest run"
   },
   "dependencies": {
     "next": "15.2.1"
@@ -20,6 +21,7 @@
     "eslint-config-next": "15.2.1",
     "eslint-config-prettier": "^10.0.2",
     "prettier": "^3.5.3",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^3.0.8"
   }
 }
