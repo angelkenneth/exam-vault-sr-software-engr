@@ -12,4 +12,4 @@ export const getJson = async <T>(req: NextRequest): Promise<T> => {
     }
     throw error;
   }
-}
+};

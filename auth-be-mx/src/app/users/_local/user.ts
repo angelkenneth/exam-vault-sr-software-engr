@@ -6,7 +6,7 @@ export interface User {
 
 export type PublicUser = Omit<User, 'password'>;
 
-export interface SignInInput {
+export interface GenericUserInput {
   username: string;
   password: string;
 }

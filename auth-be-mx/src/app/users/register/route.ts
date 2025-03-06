@@ -1,23 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getJson } from '@/lib/shared/get-json';
-import { PublicUser, SignInInput, User } from '@/app/users/_local/user';
+import { PublicUser, GenericUserInput, User } from '@/app/users/_local/user';
 import { wrapHandler } from '@/lib/shared/wrap-handler';
 import { signInInputSchema } from '@/app/users/_validation/sign-in-input';
 import { dataOrThrow } from '@/lib/shared/data-or-throw';
 import { getUserByUsername } from '@/app/users/_database/get-by-username';
+import { hashPassword } from '@/app/users/_local/hash-password';
+import { createUser } from '@/app/users/_database/create';
+import { respondWithJwt } from '@/app/users/_local/respond-w-jwt';
 
-export const POST = wrapHandler<SignInInput, PublicUser>(
+export const POST = wrapHandler<GenericUserInput, PublicUser>(
   async (request: NextRequest) => {
-    const data = await getJson<SignInInput>(request);
+    const data = await getJson<GenericUserInput>(request);
     const { username, password } = dataOrThrow(signInInputSchema, data);
-    const user = await getUserByUsername(username);
-    if (!user) {
+    const existingUser = await getUserByUsername(username);
+    if (existingUser) {
       throw NextResponse.json(
         { username: 'Invalid username' },
-        { status: 404 }
+        { status: 400 }
       );
     }
-
-    return;
+    const hashedPassword = hashPassword(password);
+    const createdUser = await createUser({
+      username,
+      password: hashedPassword,
+    });
+    return respondWithJwt(createdUser);
   }
 );

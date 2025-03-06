@@ -1,15 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getJson } from '@/lib/shared/get-json';
-import { PublicUser, SignInInput } from '@/app/users/_local/user';
+import { PublicUser, GenericUserInput } from '@/app/users/_local/user';
 import { wrapHandler } from '@/lib/shared/wrap-handler';
 import { signInInputSchema } from '@/app/users/_validation/sign-in-input';
 import { dataOrThrow } from '@/lib/shared/data-or-throw';
 import { getUserByUsername } from '@/app/users/_database/get-by-username';
-import { omit } from 'ramda';
+import { respondWithJwt } from '@/app/users/_local/respond-w-jwt';
+import { verifyPassword } from '@/app/users/_local/verify-password';
 
-export const POST = wrapHandler<SignInInput, PublicUser>(
+export const POST = wrapHandler<GenericUserInput, PublicUser>(
   async (request: NextRequest) => {
-    const data = await getJson<SignInInput>(request);
+    const data = await getJson<GenericUserInput>(request);
     const { username, password } = dataOrThrow(signInInputSchema, data);
     const user = await getUserByUsername(username);
     if (!user) {
@@ -18,23 +19,14 @@ export const POST = wrapHandler<SignInInput, PublicUser>(
         { status: 400 }
       );
     }
-
-    // TODO implement password validation
-    if (!password) {
+    const isCorrectPassword = verifyPassword(user.password, password);
+    if (!isCorrectPassword) {
       throw NextResponse.json(
         { username: 'Invalid password' },
         { status: 400 }
       );
     }
 
-    // TODO: Implement JWT
-    const jwt = JSON.stringify({ username });
-
-    const response = NextResponse.json(omit(['password'], user));
-    response.cookies.set('token', jwt, {
-      httpOnly: true,
-      secure: true,
-    });
-    return response;
+    return respondWithJwt(user);
   }
 );
