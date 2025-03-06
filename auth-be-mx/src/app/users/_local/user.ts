@@ -4,11 +4,9 @@ export interface User {
   password: string;
 }
 
+export type PublicUser = Omit<User, 'password'>;
+
 export interface SignInInput {
   username: string;
   password: string;
-}
-
-export interface SignUpOutput {
-  okay: boolean;
 }
