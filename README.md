@@ -15,3 +15,4 @@
 2. Due to time constraints, I did use Gen AIs like GitHub Copilot
    1. But rest assured that I did not just blindly use them
    2. I understand it and it would have been the code that I would have wrote anyway
+3. Decide to make it a POST-only API and not a RESTful API
