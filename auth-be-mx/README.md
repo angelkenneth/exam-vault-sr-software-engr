@@ -6,10 +6,9 @@
 pnpm install && \
 pnpm exec drizzle-kit migrate
 
-pnpm start
+pnpm dev
 
-pnpm format:fix
-
+pnpm format:fix && \
 pnpm test
 ```
 
