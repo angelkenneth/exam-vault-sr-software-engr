@@ -7,10 +7,7 @@ export const dataOrThrow = <TShape>(
 ): TShape => {
   const { error, data } = schema.safeParse(input);
   if (error) {
-    throw NextResponse.json(
-      { message: 'Invalid input', error },
-      { status: 400 }
-    );
+    throw NextResponse.json(error, { status: 400 });
   }
   return data as TShape;
 };
