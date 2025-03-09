@@ -9,6 +9,7 @@ import { hashPassword } from '@/app/users/_local/hash-password';
 import { createUser } from '@/app/users/_database/create';
 import { respondWithJwt } from '@/app/users/_local/respond-w-jwt';
 import { getConfig } from '@/app/config/_database/get-config';
+import { toZodError } from '@/lib/shared/to-zod-error';
 
 export const POST = wrapHandler<GenericUserInput, PublicUser>(
   async (request: NextRequest) => {
@@ -17,7 +18,7 @@ export const POST = wrapHandler<GenericUserInput, PublicUser>(
     const existingUser = await getUserByUsername(username);
     if (existingUser) {
       throw NextResponse.json(
-        { username: 'Invalid username' },
+        toZodError({ username: 'Invalid username' }),
         { status: 400 }
       );
     }
