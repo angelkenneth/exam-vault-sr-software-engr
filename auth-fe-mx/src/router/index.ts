@@ -17,7 +17,7 @@ const router = createRouter({
     {
       path: '/sign-out',
       name: 'sign-out',
-      component: () => import('../views/SignOutView.vue'),
+      component: () => import('../users/presentation/SignOutView.vue'),
     },
   ],
 })

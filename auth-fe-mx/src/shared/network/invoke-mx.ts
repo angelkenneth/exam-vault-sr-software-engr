@@ -1,4 +1,4 @@
-import type { BeMx } from '@/shared/mx-index.ts'
+import type { BeMx } from '@/shared/network/mx-index.ts'
 
 export const invokeMx = async <TInput, TOutput>(
   microservice: BeMx,

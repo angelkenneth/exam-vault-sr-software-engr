@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { tryToSignOut } from '@/network/sign-out.ts'
+import { tryToSignOut } from '../network/sign-out.ts'
 </script>
 
 <template>
