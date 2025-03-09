@@ -1,5 +1,13 @@
 <script setup lang="ts">
-import { tryToSignOut } from '../network/SignOut.ts'
+import { tryToSignOutNetwork } from '../network/SignOut.ts'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const tryToSignOut = async () => {
+  await tryToSignOutNetwork()
+  await router.push('/sign-in')
+}
 </script>
 
 <template>
