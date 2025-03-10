@@ -1,6 +1,7 @@
 import { JsonWebTokenError, JwtPayload, verify } from 'jsonwebtoken';
 import { PublicUser } from '@/app/users/_local/user';
 import { NextResponse } from 'next/server';
+import { toZodError } from '@/lib/shared/to-zod-error';
 
 export const decodeJwt = (secretKey: string, token: string): PublicUser => {
   let payload: JwtPayload | string;
@@ -9,7 +10,7 @@ export const decodeJwt = (secretKey: string, token: string): PublicUser => {
   } catch (error) {
     if (error instanceof JsonWebTokenError) {
       // TODO might be insecure to return the error message in raw form
-      throw NextResponse.json({ message: error.message }, { status: 401 });
+      throw NextResponse.json(toZodError({ message: error.message }), { status: 401 });
     }
     throw error;
   }
