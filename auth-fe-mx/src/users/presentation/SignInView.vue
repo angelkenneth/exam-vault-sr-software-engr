@@ -16,7 +16,7 @@ const ableToSignIn = () => {
   usernameError.value = ''
   password.value = ''
   passwordError.value = ''
-  router.push('/sign-out')
+  router.push('/profile')
 }
 
 const tryToSignIn = async () => {
