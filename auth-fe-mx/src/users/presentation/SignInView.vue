@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { tryToSignInNetwork } from '@/users/network/SignIn.ts'
 import { ref } from 'vue'
-import { ifZodResponse } from '@/shared/utility/if-zod-response.ts'
+import { whenZodError } from '@/shared/utility/when-zod-error.ts'
 import { zodMessageFromPath } from '@/shared/utility/zod-message-from-path.ts'
 import { useRouter } from 'vue-router'
+import { cond } from 'ramda'
+import { when200 } from '@/shared/utility/when-response.ts'
+import type { SignInInput } from '@/users/entity/SignIn.ts'
+import type { EmptyShape } from '@/shared/data/empty.ts'
 
 const router = useRouter()
 const username = ref('')
@@ -11,25 +15,22 @@ const usernameError = ref('')
 const password = ref('')
 const passwordError = ref('')
 
-const ableToSignIn = () => {
-  username.value = ''
-  usernameError.value = ''
-  password.value = ''
-  passwordError.value = ''
+const redirectToProfile = () => {
   router.push('/profile')
 }
 
-const tryToSignIn = async () => {
+const tryToSignIn = () => {
   usernameError.value = ''
   passwordError.value = ''
-  await tryToSignInNetwork({ username: username.value, password: password.value })
-    .then(ableToSignIn)
-    .catch(
-      ifZodResponse((zodError) => {
-        usernameError.value = zodMessageFromPath(['username'], zodError) || ''
-        passwordError.value = zodMessageFromPath(['password'], zodError) || ''
+  tryToSignInNetwork({ username: username.value, password: password.value }).then(
+    cond([
+      when200<EmptyShape>(redirectToProfile),
+      whenZodError<SignInInput>((zodError) => {
+        usernameError.value = zodMessageFromPath(['username'], zodError)
+        passwordError.value = zodMessageFromPath(['password'], zodError)
       }),
-    )
+    ]),
+  )
 }
 </script>
 

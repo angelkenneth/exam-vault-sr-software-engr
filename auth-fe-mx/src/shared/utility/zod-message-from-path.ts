@@ -7,10 +7,10 @@ import type { PlainZodError } from '@/shared/data/plain-zod-error.ts'
 export const zodMessageFromPath = <TInput>(
   path: string[],
   zodError: PlainZodError<TInput>,
-): string | null => {
+): string => {
   const issue = zodError.issues.find((issue) => areSameArray(issue.path, path))
   if (issue) {
     return issue.message
   }
-  return null
+  return ''
 }
