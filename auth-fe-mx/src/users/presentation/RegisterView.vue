@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { tryToSignInNetwork } from '@/users/network/SignIn.ts'
 import { ref } from 'vue'
 import { whenZodError } from '@/shared/utility/when-zod-error.ts'
 import { zodMessageFromPath } from '@/shared/utility/zod-message-from-path.ts'
@@ -7,26 +6,27 @@ import { useRouter } from 'vue-router'
 import { cond } from 'ramda'
 import { when200 } from '@/shared/utility/when-response.ts'
 import type { GenericUserInput } from '@/users/entity/GenericUserInput.ts'
+import { tryToRegisterNetwork } from '@/users/network/Register.ts'
 
 const router = useRouter()
 const username = ref('')
 const usernameError = ref('')
 const password = ref('')
 const passwordError = ref('')
-const isSigningIn = ref(false)
+const isRegisteringIn = ref(false)
 
 const redirectToProfile = () => {
   router.push('/profile')
 }
 
-const tryToSignIn = () => {
-  if (isSigningIn.value) {
+const tryToRegister = () => {
+  if (isRegisteringIn.value) {
     return
   }
-  isSigningIn.value = true
+  isRegisteringIn.value = true
   usernameError.value = ''
   passwordError.value = ''
-  tryToSignInNetwork({ username: username.value, password: password.value })
+  tryToRegisterNetwork({ username: username.value, password: password.value })
     .then(
       cond([
         when200(redirectToProfile),
@@ -37,22 +37,22 @@ const tryToSignIn = () => {
       ]),
     )
     .finally(() => {
-      isSigningIn.value = false
+      isRegisteringIn.value = false
     })
 }
 </script>
 
 <template>
   <div class="about">
-    <h1>Please Sign In</h1>
-    <form @submit.prevent="tryToSignIn">
+    <h1>Register here</h1>
+    <form @submit.prevent="tryToRegister">
       <input
         type="text"
         v-model="username"
         placeholder="Username"
         maxlength="32"
         required
-        :disabled="isSigningIn"
+        :disabled="isRegisteringIn"
       />
       <div>{{ usernameError }}</div>
       <input
@@ -61,11 +61,11 @@ const tryToSignIn = () => {
         placeholder="Password"
         maxlength="64"
         required
-        :disabled="isSigningIn"
+        :disabled="isRegisteringIn"
       />
       <div>{{ passwordError }}</div>
-      <button type="submit" :disabled="isSigningIn">
-        {{ isSigningIn ? 'Signing in...' : 'Sign in' }}
+      <button type="submit" :disabled="isRegisteringIn">
+        {{ isRegisteringIn ? 'Registering...' : 'Register' }}
       </button>
     </form>
   </div>

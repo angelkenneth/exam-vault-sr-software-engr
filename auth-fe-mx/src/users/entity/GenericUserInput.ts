@@ -1,4 +1,4 @@
-export interface SignInInput {
+export interface GenericUserInput {
   username: string
   password: string
 }

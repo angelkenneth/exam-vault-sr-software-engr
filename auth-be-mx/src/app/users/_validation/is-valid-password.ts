@@ -1,11 +1,16 @@
 import { pipe, prop } from 'ramda';
 import { ZodIssueCode } from 'zod';
 import type { RefinementCtx } from 'zod';
+import { escapeRegex } from '@/lib/shared/escape-regex';
 
 /**
  * Ref: https://owasp.org/www-community/password-special-characters
  */
-const validSpecialCharacters = /[!"#$%&'()*+,\-./:;<=>?@\[\]^_`{|}~]/g;
+export const validSpecialCharacters = '!"#$%&\'()*+,\-./:;<=>?@[\\]^_`{|}~';
+export const validSpecialRegex = new RegExp(
+  `[${escapeRegex(validSpecialCharacters)}]`,
+  'g'
+);
 
 export const isValidPasswordDetailed = (password: string) => {
   const validationMap = {
@@ -14,8 +19,7 @@ export const isValidPasswordDetailed = (password: string) => {
     hasLowerCase: /[a-z]/.test(password),
     hasUpperCase: /[A-Z]/.test(password),
     hasNumber: /[0-9]/.test(password),
-    hasSpecialCharacter:
-      [...password.matchAll(validSpecialCharacters)].length >= 1,
+    hasSpecialCharacter: [...password.matchAll(validSpecialRegex)].length >= 1,
   };
   const isValid = Object.values(validationMap).every(Boolean);
   return { ...validationMap, isValid };
@@ -88,7 +92,7 @@ export const isValidPasswordZodVerbose = (
   if (!hasSpecialCharacter) {
     ctx.addIssue({
       code: ZodIssueCode.custom,
-      message: 'Password must contain a special character',
+      message: `Contain at least 1 special character: ${validSpecialCharacters}`,
     });
   }
   if (Object.keys(unexpectedValidation).length > 0) {
