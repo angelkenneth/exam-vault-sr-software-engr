@@ -1,4 +1,4 @@
-import { and, curryN, propEq, T } from 'ramda'
+import { both, curryN, propEq, T } from 'ramda'
 import type {
   WhenJsonResponse,
   WhenResponse,
@@ -35,6 +35,6 @@ export const wrapJsonAsInput =
 export const when200 = whenResponse(is200)
 export const when200Json: WhenJsonResponse = <TInput, TOutput = void>(
   if200JsonFn: (json: TInput) => TOutput | Promise<TOutput>,
-) => whenResponse(and(is200, isJson), wrapJsonAsInput<TInput, TOutput>(if200JsonFn))
+) => whenResponse((r) => both(is200, isJson)(r), wrapJsonAsInput<TInput, TOutput>(if200JsonFn))
 
 export const when401 = whenResponse(is401)
