@@ -7,7 +7,6 @@ import { useRouter } from 'vue-router'
 import { cond } from 'ramda'
 import { when200 } from '@/shared/utility/when-response.ts'
 import type { SignInInput } from '@/users/entity/SignIn.ts'
-import type { EmptyShape } from '@/shared/data/empty.ts'
 
 const router = useRouter()
 const username = ref('')

@@ -10,7 +10,9 @@ export interface WhenResponse {
 }
 
 export interface WhenResponse1Input {
-  <TOutput = void>(ifTrueFn: (response: ResponseSync) => TOutput | Promise<TOutput>): WhenResponseCondition<TOutput>
+  <TOutput = void>(
+    ifTrueFn: (response: ResponseSync) => TOutput | Promise<TOutput>,
+  ): WhenResponseCondition<TOutput>
 }
 
 export interface WhenJsonResponse {

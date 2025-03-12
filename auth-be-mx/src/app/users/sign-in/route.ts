@@ -16,17 +16,15 @@ export const POST = wrapHandler<GenericUserInput, PublicUser>(
     const { username, password } = dataOrThrow(signInInputSchema, data);
     const user = await getUserByUsername(username);
     if (!user) {
-      throw NextResponse.json(
-        toZodError({ username: 'Invalid username' }),
-        { status: 400 }
-      );
+      throw NextResponse.json(toZodError({ username: 'Invalid username' }), {
+        status: 400,
+      });
     }
     const isCorrectPassword = verifyPassword(user.password, password);
     if (!isCorrectPassword) {
-      throw NextResponse.json(
-        toZodError({ password: 'Invalid password' }),
-        { status: 400 }
-      );
+      throw NextResponse.json(toZodError({ password: 'Invalid password' }), {
+        status: 400,
+      });
     }
     const config = await getConfig();
     return respondWithJwt(config.secretKey, user);

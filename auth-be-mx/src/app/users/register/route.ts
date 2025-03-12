@@ -17,10 +17,9 @@ export const POST = wrapHandler<GenericUserInput, PublicUser>(
     const { username, password } = dataOrThrow(signInInputSchema, data);
     const existingUser = await getUserByUsername(username);
     if (existingUser) {
-      throw NextResponse.json(
-        toZodError({ username: 'Invalid username' }),
-        { status: 400 }
-      );
+      throw NextResponse.json(toZodError({ username: 'Invalid username' }), {
+        status: 400,
+      });
     }
     const hashedPassword = hashPassword(password);
     const createdUser = await createUser({
