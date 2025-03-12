@@ -1,14 +1,27 @@
-import { z } from 'zod';
-import { isValidUsername } from '@/app/users/_validation/is-valid-username';
-import { isValidPassword } from '@/app/users/_validation/is-valid-password';
+import { z, RefinementCtx } from 'zod';
+import {
+  isValidUsernameZodObfuscated,
+  isValidUsernameZodVerbose,
+} from '@/app/users/_validation/is-valid-username';
+import {
+  isValidPasswordZodObfuscated,
+  isValidPasswordZodVerbose,
+} from '@/app/users/_validation/is-valid-password';
 
-export const signInInputSchema = z.object({
-  username: z
-    .string()
-    .nonempty()
-    .refine(isValidUsername, { message: 'Invalid username' }),
-  password: z
-    .string()
-    .nonempty()
-    .refine(isValidPassword, { message: 'Invalid password' }),
+export const createPasswordSchema = (
+  isValidUsername: (username: string, ctx: RefinementCtx) => void,
+  isValidPassword: (password: string, ctx: RefinementCtx) => void
+) => ({
+  username: z.string().nonempty().superRefine(isValidUsername),
+  password: z.string().nonempty().superRefine(isValidPassword),
 });
+
+export const registerInputSchema = z.object(
+  createPasswordSchema(isValidUsernameZodVerbose, isValidPasswordZodVerbose)
+);
+export const signInInputSchema = z.object(
+  createPasswordSchema(
+    isValidUsernameZodObfuscated,
+    isValidPasswordZodObfuscated
+  )
+);
