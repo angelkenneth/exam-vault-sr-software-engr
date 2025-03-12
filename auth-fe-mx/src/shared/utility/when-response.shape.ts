@@ -1,8 +1,7 @@
 import type { ResponseSync } from '@/shared/data/response-sync.ts'
-import type { PlainZodError } from '@/shared/data/plain-zod-error.ts'
 
 export interface WhenResponse {
-  <TOutput>(
+  <TOutput = void>(
     conditionFn: (response: ResponseSync) => boolean,
     ifTrueFn: (response: ResponseSync) => TOutput | Promise<TOutput>,
   ): WhenResponseCondition<TOutput>
@@ -11,11 +10,11 @@ export interface WhenResponse {
 }
 
 export interface WhenResponse1Input {
-  <TOutput>(ifTrueFn: (response: ResponseSync) => TOutput | Promise<TOutput>): WhenResponseCondition<TOutput>
+  <TOutput = void>(ifTrueFn: (response: ResponseSync) => TOutput | Promise<TOutput>): WhenResponseCondition<TOutput>
 }
 
-export interface When200Json {
-  <TInput, TOutput>(
+export interface WhenJsonResponse {
+  <TInput, TOutput = void>(
     if200JsonFn: (json: TInput) => TOutput | Promise<TOutput>,
   ): WhenResponseCondition<TOutput>
 }

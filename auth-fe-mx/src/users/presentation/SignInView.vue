@@ -24,7 +24,7 @@ const tryToSignIn = () => {
   passwordError.value = ''
   tryToSignInNetwork({ username: username.value, password: password.value }).then(
     cond([
-      when200<EmptyShape>(redirectToProfile),
+      when200(redirectToProfile),
       whenZodError<SignInInput>((zodError) => {
         usernameError.value = zodMessageFromPath(['username'], zodError)
         passwordError.value = zodMessageFromPath(['password'], zodError)

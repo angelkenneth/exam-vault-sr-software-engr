@@ -1,6 +1,6 @@
 import { and, curryN, propEq, T } from 'ramda'
 import type {
-  When200Json,
+  WhenJsonResponse,
   WhenResponse,
   WhenResponse1Input,
 } from '@/shared/utility/when-response.shape.ts'
@@ -10,25 +10,31 @@ export const whenResponse: WhenResponse = curryN(
   2,
   (
     conditionFn: (response: ResponseSync) => boolean,
-    ifTrueFn: <TOutput>(response: ResponseSync) => TOutput | Promise<TOutput>,
+    ifTrueFn: <TOutput = void>(response: ResponseSync) => TOutput | Promise<TOutput>,
   ) => [
     (response: ResponseSync) => response instanceof Response && conditionFn(response),
     ifTrueFn,
   ],
 )
 
-export const elseResponse: WhenResponse1Input = <TOutput>(
+export const elseResponse: WhenResponse1Input = <TOutput = void>(
   fallbackFn: (response: ResponseSync) => TOutput | Promise<TOutput>,
 ) => [T, fallbackFn]
 
 export const isJson = (response: ResponseSync): boolean =>
-  response.isJson || response.headers.get('content-type')?.includes('application/json')
+  response.isJson || response.headers.get('content-type')?.includes('application/json') || false
 export const is200 = propEq(200, 'status')
 export const is400 = propEq(400, 'status')
+export const is401 = propEq(401, 'status')
 
-export const wrapJsonAsInput = <TInput>(if200JsonFn: (json: TInput) => TOutput | Promise<TOutput>) => (response) => if200JsonFn(response.jsonSync<TInput>())
+export const wrapJsonAsInput =
+  <TInput, TOutput = void>(if200JsonFn: (json: TInput) => TOutput | Promise<TOutput>) =>
+  (response: ResponseSync) =>
+    if200JsonFn(response.jsonSync<TInput>())
 
 export const when200 = whenResponse(is200)
-export const when200Json: When200Json = <TInput, TOutput>(
+export const when200Json: WhenJsonResponse = <TInput, TOutput = void>(
   if200JsonFn: (json: TInput) => TOutput | Promise<TOutput>,
-) => whenResponse(and(is200, isJson), wrapJsonAsInput<TInput>(if200JsonFn))
+) => whenResponse(and(is200, isJson), wrapJsonAsInput<TInput, TOutput>(if200JsonFn))
+
+export const when401 = whenResponse(is401)

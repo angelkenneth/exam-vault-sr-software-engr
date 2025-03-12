@@ -1,14 +1,19 @@
 import type { BeMx } from '@/shared/network/mx-index.ts'
 import type { ResponseSync } from '@/shared/data/response-sync.ts'
 
-export const invokeMx = async <TInput>(microservice: BeMx, path: string, input: TInput) =>
-  fetch(`${microservice}${path}`, {
+export const invokeMx = async <TInput>(microservice: BeMx, path: string, input: TInput) => {
+  const url = new URL(microservice)
+  url.pathname = path
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  const request = new Request(url, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
     body: JSON.stringify(input),
-  }).then(async <TShape>(r2): ResponseSync => {
+    headers,
+    credentials: 'include',
+    mode: 'cors',
+  })
+  return fetch(request).then(async <TShape>(r2: Response): Promise<ResponseSync> => {
     const responseSync = r2 as ResponseSync
     let json: TShape
     try {
@@ -21,6 +26,7 @@ export const invokeMx = async <TInput>(microservice: BeMx, path: string, input: 
       return responseSync
     }
     responseSync.isJson = true
-    responseSync.jsonSync = () => json
-    return responseSync;
+    responseSync.jsonSync = (() => json) as ResponseSync['jsonSync']
+    return responseSync
   })
+}

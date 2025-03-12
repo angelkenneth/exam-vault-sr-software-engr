@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
         headers: [
           // TODO not secure, but good enough for demo
           { key: 'Access-Control-Allow-Credentials', value: 'true' },
-          { key: 'Access-Control-Allow-Origin', value: '*' }, // replace this your actual origin
+          { key: 'Access-Control-Allow-Origin', value: 'http://localhost:5173' }, // replace this your actual origin
           {
             key: 'Access-Control-Allow-Methods',
             value: 'GET,DELETE,PATCH,POST,PUT',
