@@ -50,3 +50,5 @@ pnpm create next-app@latest auth-be-mx --typescript --eslint --src-dir --turbopa
 7. [How to Hash Passwords with bcrypt in Node.js](https://www.freecodecamp.org/news/how-to-hash-passwords-with-bcrypt-in-nodejs/)
 8. [How to use JSON Web Token (JWT) in Node.js](https://codedamn.com/news/nodejs/use-json-web-token-jwt-in-nodejs)
 9. [Using CORS in Next.js to handle cross-origin requests](https://blog.logrocket.com/using-cors-next-js-handle-cross-origin-requests/)
+10. [NextJs > Middleware](https://nextjs.org/docs/pages/building-your-application/routing/middleware)
+11. [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
