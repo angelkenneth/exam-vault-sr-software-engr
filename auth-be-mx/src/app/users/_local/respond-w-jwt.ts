@@ -1,4 +1,4 @@
-import { JwtUserPayload, User } from '@/app/users/_entiry/user';
+import { JwtUserPayload, User } from '@/app/users/_entity/user';
 import { NextResponse } from 'next/server';
 import { omit } from 'ramda';
 import { sign } from 'jsonwebtoken';

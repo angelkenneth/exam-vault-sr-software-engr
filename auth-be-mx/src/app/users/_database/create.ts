@@ -1,4 +1,4 @@
-import { GenericUserInput, User } from '@/app/users/_entiry/user';
+import { GenericUserInput, User } from '@/app/users/_entity/user';
 import { db } from '@/db';
 import { usersTable } from '@/db/schema';
 

@@ -1,5 +1,5 @@
 import { JsonWebTokenError, JwtPayload, verify } from 'jsonwebtoken';
-import { JwtUserPayload, PublicUser } from '@/app/users/_entiry/user';
+import { JwtUserPayload, PublicUser } from '@/app/users/_entity/user';
 import { NextResponse } from 'next/server';
 import { toZodError } from '@/lib/shared/to-zod-error';
 

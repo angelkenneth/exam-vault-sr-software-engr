@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getJson } from '@/lib/shared/get-json';
-import { PublicUser, GenericUserInput } from '@/app/users/_entiry/user';
+import { PublicUser, GenericUserInput } from '@/app/users/_entity/user';
 import { wrapHandler } from '@/lib/shared/wrap-handler';
 import { registerInputSchema } from '@/app/users/_validation/sign-in-input';
 import { dataOrThrow } from '@/lib/shared/data-or-throw';

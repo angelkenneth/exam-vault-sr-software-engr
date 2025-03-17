@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { wrapHandler } from '@/lib/shared/wrap-handler';
-import { TokenInput } from '@/app/users/_entiry/token';
+import { TokenInput } from '@/app/users/_entity/token';
 import { dataOrThrow } from '@/lib/shared/data-or-throw';
 import { tokenInputSchema } from '@/app/users/_validation/token-input';
 import { getJson } from '@/lib/shared/get-json';
 import { decodeJwt } from '@/app/users/_local/decode-jwt';
 import { getConfig } from '@/app/config/_database/get-config';
-import { JwtUserPayload } from '@/app/users/_entiry/user';
+import { JwtUserPayload } from '@/app/users/_entity/user';
 
 export const POST = wrapHandler<TokenInput, JwtUserPayload>(
   async (request: NextRequest) => {
