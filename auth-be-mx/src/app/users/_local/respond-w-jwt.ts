@@ -13,7 +13,7 @@ export const respondWithJwt = (
     ...publicUser,
     sub: `${publicUser.id}`,
   };
-  const jwt = sign(jwtPayload, secretKey, { expiresIn: '24hr' });
+  const jwt = sign(jwtPayload, secretKey, { expiresIn: '7d' });
   const newJwtPayload = decodeJwt(secretKey, jwt);
   const response = NextResponse.json(newJwtPayload);
   response.cookies.set('session', jwt, {
