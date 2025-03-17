@@ -53,3 +53,4 @@ pnpm create next-app@latest auth-be-mx --typescript --eslint --src-dir --turbopa
 10. [NextJs > Middleware](https://nextjs.org/docs/pages/building-your-application/routing/middleware)
 11. [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
 12. [Vitest > Failed to load url resolved bug](https://github.com/vitest-dev/vitest/discussions/3042)
+13. [Zod validation for phone numbers](https://stackoverflow.com/a/78046054/912215)

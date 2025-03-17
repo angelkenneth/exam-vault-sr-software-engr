@@ -7,6 +7,29 @@ import { deleteContactInputSchema } from '@/app/contacts/_validation/delete-cont
 import { dataOrThrow } from '@/lib/shared/local/data-or-throw';
 import { deleteContactDatabase } from '@/app/contacts/_database/delete-contact';
 import { userFromSession } from '@/app/auth/_network/user-from-session';
+import { createContactDatabase } from '@/app/contacts/_database/create-contact';
+import { createContactInputSchema } from '@/app/contacts/_validation/create-contact-input';
+import {
+  CreateContactApiInput,
+  CreateContactDatabaseInput,
+} from '@/app/contacts/_entity/create-contact-input';
+import { ContactModel } from '@/app/contacts/_entity/contact';
+
+export const POST = wrapHandler<CreateContactApiInput, ContactModel>(
+  async (request) => {
+    const user = await userFromSession(request);
+    const apiInput = dataOrThrow(
+      createContactInputSchema,
+      await getJson<CreateContactApiInput>(request)
+    );
+    const databaseInput: CreateContactDatabaseInput = {
+      ...apiInput,
+      ownerId: user.id,
+    };
+    const contact = await createContactDatabase(databaseInput);
+    return NextResponse.json(contact, { status: 201 });
+  }
+);
 
 export const DELETE = wrapHandler<DeleteContactInput, EmptyShape>(
   async (request) => {
