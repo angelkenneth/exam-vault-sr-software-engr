@@ -3,9 +3,9 @@ import { contactsTable } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
 export const deleteContactDatabase = async (
-  contactAccessId: number
+  contactId: number
 ): Promise<number> =>
   db
     .delete(contactsTable)
-    .where(eq(contactsTable.id, contactAccessId))
+    .where(eq(contactsTable.id, contactId))
     .then((r) => r.rowsAffected);
