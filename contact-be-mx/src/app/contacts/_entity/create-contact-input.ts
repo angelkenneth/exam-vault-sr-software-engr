@@ -3,7 +3,4 @@ export interface CreateContactDatabaseInput {
   mobileNumberE164: string;
 }
 
-export type CreateContactApiInput = Omit<
-  CreateContactDatabaseInput,
-  'ownerId'
->;
+export type CreateContactApiInput = Omit<CreateContactDatabaseInput, 'ownerId'>;

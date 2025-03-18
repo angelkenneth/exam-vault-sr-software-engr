@@ -6,7 +6,7 @@ import parsePhoneNumberFromString from 'libphonenumber-js';
  */
 export const isValidMobileNumberE164 = (
   mobileNumberE164: string,
-  ctx: RefinementCtx,
+  ctx: RefinementCtx
 ) => {
   const phone = parsePhoneNumberFromString(mobileNumberE164);
   if (phone && phone.isValid()) {

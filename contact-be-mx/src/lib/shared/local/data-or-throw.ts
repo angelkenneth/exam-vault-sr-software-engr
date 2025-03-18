@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { NextResponse } from 'next/server';
 
-export const dataOrThrow = <TShape>(
+export const dataOrThrow: DateOrThrow = <TShape>(
   schema: z.ZodObject<z.ZodRawShape>,
   input: TShape
 ): TShape => {
@@ -11,3 +11,12 @@ export const dataOrThrow = <TShape>(
   }
   return data as TShape;
 };
+
+export interface DateOrThrow {
+  <TShape>(schema: z.ZodObject<z.ZodRawShape>, input: TShape): TShape;
+
+  <TShape>(
+    schema: z.ZodObject<z.ZodRawShape>,
+    input: Record<string, string>
+  ): TShape;
+}

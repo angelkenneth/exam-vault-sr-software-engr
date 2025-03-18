@@ -1,5 +1,5 @@
 import { z } from 'zod';
 
 export const deleteContactInputSchema = z.strictObject({
-  id: z.number(),
+  contactId: z.coerce.number().int(),
 });

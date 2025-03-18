@@ -4,7 +4,7 @@ import { CreateContactDatabaseInput } from '@/app/contacts/_entity/create-contac
 import { ContactModel } from '@/app/contacts/_entity/contact';
 
 export const createContactDatabase = async (
-  input: CreateContactDatabaseInput,
+  input: CreateContactDatabaseInput
 ): Promise<ContactModel> =>
   db
     .insert(contactsTable)
