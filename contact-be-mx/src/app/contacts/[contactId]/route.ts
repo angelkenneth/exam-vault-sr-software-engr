@@ -10,11 +10,12 @@ import { isContactOwnedByIdDatabase } from '@/app/contacts/_database/is-contact-
 import { getByIdContactInputSchema } from '@/app/contacts/_validation/get-by-id-contact-input';
 import { ContactModel } from '@/app/contacts/_entity/contact';
 import { getContactByIdDatabase } from '@/app/contacts/_database/get-contact-by-id';
+import { GetContactByIdInput } from '@/app/contacts/_entity/get-contact-by-id';
 
-export const GET = wrapHandler<DeleteContactInput, ContactModel>(
+export const GET = wrapHandler<GetContactByIdInput, ContactModel>(
   async (request, ctx) => {
     const user = await userFromSession(request);
-    const { contactId } = dataOrThrow<DeleteContactInput>(
+    const { contactId } = dataOrThrow<GetContactByIdInput>(
       getByIdContactInputSchema,
       await ctx.params
     );
