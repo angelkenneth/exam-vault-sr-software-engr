@@ -11,6 +11,11 @@ import { getByIdContactInputSchema } from '@/app/contacts/_validation/get-by-id-
 import { ContactModel } from '@/app/contacts/_entity/contact';
 import { getContactByIdDatabase } from '@/app/contacts/_database/get-contact-by-id';
 import { GetContactByIdInput } from '@/app/contacts/_entity/get-contact-by-id';
+import { UpdateContactInput } from '@/app/contacts/_entity/update-contact-input';
+import { createContactInputSchema } from '@/app/contacts/_validation/create-contact-input';
+import { getJson } from '@/lib/shared/local/get-json';
+import { CreateContactApiInput } from '@/app/contacts/_entity/create-contact-input';
+import { updateContactDatabase } from '@/app/contacts/_database/update-contact';
 
 export const GET = wrapHandler<GetContactByIdInput, ContactModel>(
   async (request, ctx) => {
@@ -26,6 +31,28 @@ export const GET = wrapHandler<GetContactByIdInput, ContactModel>(
     if (contact.ownerId !== user.id) {
       return zodForbidden({ contactId: 'You are not the owner' });
     }
+    return NextResponse.json(contact);
+  }
+);
+
+export const PATCH = wrapHandler<GetContactByIdInput, UpdateContactInput>(
+  async (request, ctx) => {
+    const user = await userFromSession(request);
+    const { contactId } = dataOrThrow<GetContactByIdInput>(
+      getByIdContactInputSchema,
+      await ctx.params
+    );
+    const input = dataOrThrow(
+      createContactInputSchema,
+      await getJson<CreateContactApiInput>(request)
+    );
+    const isOwned = await isContactOwnedByIdDatabase(contactId, user.id);
+    if (!isOwned) {
+      return zodForbidden({
+        contactId: 'You can only update your own contact',
+      });
+    }
+    const contact = await updateContactDatabase(contactId, input);
     return NextResponse.json(contact);
   }
 );
