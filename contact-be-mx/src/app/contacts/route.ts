@@ -10,6 +10,14 @@ import {
   CreateContactDatabaseInput,
 } from '@/app/contacts/_entity/create-contact-input';
 import { ContactModel } from '@/app/contacts/_entity/contact';
+import { EmptyShape } from '@/lib/shared/entity/empty';
+import { listContactByOwnerIdDatabase } from '@/app/contacts/_database/list-contact-by-owner-id';
+
+export const GET = wrapHandler<EmptyShape, ContactModel[]>(async (request) => {
+  const user = await userFromSession(request);
+  const contacts = await listContactByOwnerIdDatabase(user.id);
+  return NextResponse.json(contacts);
+});
 
 export const POST = wrapHandler<CreateContactApiInput, ContactModel>(
   async (request) => {

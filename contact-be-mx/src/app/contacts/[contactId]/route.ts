@@ -9,7 +9,7 @@ import { zodForbidden, zodNotFound } from '@/lib/shared/local/to-zod-error';
 import { isContactOwnedByIdDatabase } from '@/app/contacts/_database/is-contact-owned-by-id';
 import { getByIdContactInputSchema } from '@/app/contacts/_validation/get-by-id-contact-input';
 import { ContactModel } from '@/app/contacts/_entity/contact';
-import { getContactByIdDatabase } from '@/app/contacts/_database/get-by-id-contact';
+import { getContactByIdDatabase } from '@/app/contacts/_database/get-contact-by-id';
 
 export const GET = wrapHandler<DeleteContactInput, ContactModel>(
   async (request, ctx) => {
