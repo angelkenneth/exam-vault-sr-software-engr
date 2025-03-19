@@ -12,10 +12,9 @@ import { ContactModel } from '@/app/contacts/_entity/contact';
 import { getContactByIdDatabase } from '@/app/contacts/_database/get-contact-by-id';
 import { GetContactByIdInput } from '@/app/contacts/_entity/get-contact-by-id';
 import { UpdateContactInput } from '@/app/contacts/_entity/update-contact-input';
-import { createContactInputSchema } from '@/app/contacts/_validation/create-contact-input';
 import { getJson } from '@/lib/shared/local/get-json';
-import { CreateContactApiInput } from '@/app/contacts/_entity/create-contact-input';
 import { updateContactDatabase } from '@/app/contacts/_database/update-contact';
+import { updateContactInputSchema } from '@/app/contacts/_validation/update-contact-input';
 
 export const GET = wrapHandler<GetContactByIdInput, ContactModel>(
   async (request, ctx) => {
@@ -43,8 +42,8 @@ export const PATCH = wrapHandler<GetContactByIdInput, UpdateContactInput>(
       await ctx.params
     );
     const input = dataOrThrow(
-      createContactInputSchema,
-      await getJson<CreateContactApiInput>(request)
+      updateContactInputSchema,
+      await getJson<UpdateContactInput>(request)
     );
     const isOwned = await isContactOwnedByIdDatabase(contactId, user.id);
     if (!isOwned) {
