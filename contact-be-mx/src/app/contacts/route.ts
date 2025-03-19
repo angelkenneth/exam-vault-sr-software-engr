@@ -11,11 +11,11 @@ import {
 } from '@/app/contacts/_entity/create-contact-input';
 import { ContactModel } from '@/app/contacts/_entity/contact';
 import { EmptyShape } from '@/lib/shared/entity/empty';
-import { listContactByOwnerIdDatabase } from '@/app/contacts/_database/list-contact-by-owner-id';
+import { listContactsByOwnerIdDatabase } from '@/app/contacts/_database/list-contacts-by-owner-id';
 
 export const GET = wrapHandler<EmptyShape, ContactModel[]>(async (request) => {
   const user = await userFromSession(request);
-  const contacts = await listContactByOwnerIdDatabase(user.id);
+  const contacts = await listContactsByOwnerIdDatabase(user.id);
   return NextResponse.json(contacts);
 });
 
