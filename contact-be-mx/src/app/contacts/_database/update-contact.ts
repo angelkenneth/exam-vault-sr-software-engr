@@ -1,6 +1,6 @@
 import { ContactModel } from '@/app/contacts/_entity/contact';
 import { UpdateContactInput } from '@/app/contacts/_entity/update-contact-input';
-import { db } from '@/db';
+import { db } from '@/db/client';
 import { contactsTable } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 

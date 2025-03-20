@@ -1,4 +1,4 @@
-import { db } from '@/db';
+import { db } from '@/db/client';
 import { contactsTable } from '@/db/schema';
 import { CreateContactDatabaseInput } from '@/app/contacts/_entity/create-contact-input';
 import { ContactModel } from '@/app/contacts/_entity/contact';

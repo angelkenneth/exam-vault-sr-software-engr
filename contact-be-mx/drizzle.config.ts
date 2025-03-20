@@ -1,10 +1,12 @@
 import { defineConfig } from 'drizzle-kit';
 
-export default defineConfig({
+export const normalConfig = {
   out: './drizzle',
   schema: './src/db/schema.ts',
-  dialect: 'sqlite',
+  dialect: 'sqlite' as const,
   dbCredentials: {
     url: 'file:db.sqlite3',
   },
-});
+};
+
+export default defineConfig(normalConfig);

@@ -6,6 +6,8 @@ export default defineConfig({
     alias: [{ find: '@', replacement: resolve(__dirname, './src') }],
   },
   test: {
-    // ...
+    alias: {
+      '@/db/client': resolve('./src/db/tdd.ts'),
+    },
   },
 });
