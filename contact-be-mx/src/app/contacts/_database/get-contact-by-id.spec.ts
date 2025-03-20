@@ -2,6 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { getContactByIdDatabase } from '@/app/contacts/_database/get-contact-by-id';
 import { createContactDatabase } from '@/app/contacts/_database/create-contact';
 import { initializeTestDbEach } from '@/lib/shared/tdd/lifecycle';
+import { db } from '@/db/client';
+import { contactsTable } from '@/db/schema';
 
 describe('getContactByIdDatabase', () => {
   initializeTestDbEach();
@@ -16,6 +18,17 @@ describe('getContactByIdDatabase', () => {
       expect(readContact?.mobileNumberE164).toBe(
         expectedContact.mobileNumberE164
       );
+    });
+  });
+});
+
+describe('getContactByIdDatabase', () => {
+  initializeTestDbEach();
+
+  describe('given contact does not exist', () => {
+    it('should return it', async () => {
+      const contacts = await db.select().from(contactsTable);
+      expect(contacts).toEqual([]);
     });
   });
 });
