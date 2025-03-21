@@ -1,7 +1,7 @@
-import type { BeMx } from '@/shared/network/mx-index.ts'
+import type { MxOrigin } from '@/shared/network/mx-origin.ts'
 import type { ResponseSync } from '@/shared/data/response-sync.ts'
 
-export const invokeMx = async <TInput>(microservice: BeMx, path: string, input: TInput) => {
+export const invokeMx = async <TInput>(microservice: MxOrigin, path: string, input: TInput) => {
   const url = new URL(microservice)
   url.pathname = path
   const headers = new Headers()

@@ -1,4 +1,4 @@
 import { invokeMx } from '@/shared/network/invoke-mx.ts'
-import { BeMx } from '@/shared/network/mx-index.ts'
+import { MxOrigin } from '@/shared/network/mx-origin.ts'
 
-export const tryToGetMeNetwork = () => invokeMx(BeMx.auth, '/users/me', {})
+export const tryToGetMeNetwork = () => invokeMx(MxOrigin.auth, '/users/me', {})

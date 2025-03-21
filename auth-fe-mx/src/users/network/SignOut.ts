@@ -1,4 +1,4 @@
 import { invokeMx } from '@/shared/network/invoke-mx.ts'
-import { BeMx } from '@/shared/network/mx-index.ts'
+import { MxOrigin } from '@/shared/network/mx-origin.ts'
 
-export const tryToSignOutNetwork = () => invokeMx(BeMx.auth, '/users/sign-out', {})
+export const tryToSignOutNetwork = () => invokeMx(MxOrigin.auth, '/users/sign-out', {})

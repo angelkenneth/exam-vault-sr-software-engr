@@ -1,6 +1,6 @@
 import { invokeMx } from '@/shared/network/invoke-mx.ts'
-import { BeMx } from '@/shared/network/mx-index.ts'
+import { MxOrigin } from '@/shared/network/mx-origin.ts'
 import type { GenericUserInput } from '@/users/entity/GenericUserInput.ts'
 
 export const tryToRegisterNetwork = (input: GenericUserInput) =>
-  invokeMx(BeMx.auth, '/users/register', input)
+  invokeMx(MxOrigin.auth, '/users/register', input)
