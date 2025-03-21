@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "25a69ff6-62c8-4df5-928a-3774ea2f647b",
+  "id": "faf1775a-869d-4b79-b71b-d622f629302b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "contact_table": {
@@ -31,6 +31,76 @@
       },
       "indexes": {},
       "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "permission_table": {
+      "name": "permission_table",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "contactId": {
+          "name": "contactId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "sharedToId": {
+          "name": "sharedToId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "allowUpdate": {
+          "name": "allowUpdate",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": false
+        },
+        "allowDelete": {
+          "name": "allowDelete",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": false
+        }
+      },
+      "indexes": {
+        "permission_table_contactId_sharedToId_unique": {
+          "name": "permission_table_contactId_sharedToId_unique",
+          "columns": [
+            "contactId",
+            "sharedToId"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "permission_table_contactId_contact_table_id_fk": {
+          "name": "permission_table_contactId_contact_table_id_fk",
+          "tableFrom": "permission_table",
+          "tableTo": "contact_table",
+          "columnsFrom": [
+            "contactId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}

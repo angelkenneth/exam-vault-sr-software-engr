@@ -11,11 +11,25 @@ import {
 } from '@/app/contacts/_entity/create-contact-input';
 import { ContactModel } from '@/app/contacts/_entity/contact';
 import { EmptyShape } from '@/lib/shared/entity/empty';
-import { listContactsByOwnerIdDatabase } from '@/app/contacts/_database/list-contacts-by-owner-id';
+import {
+  listContactsPermittedToUserIdDatabase,
+  listContactsOwnedByIdDatabase,
+} from '@/app/contacts/_database/list-contacts';
+import { listContactsSchema } from '@/app/contacts/_validation/list-contacts';
+import { ListContactsInput } from '@/app/contacts/_entity/list-contacts';
 
 export const GET = wrapHandler<EmptyShape, ContactModel[]>(async (request) => {
   const user = await userFromSession(request);
-  const contacts = await listContactsByOwnerIdDatabase(user.id);
+  const { excludeShared } = dataOrThrow(
+    listContactsSchema,
+    await getJson<ListContactsInput>(request)
+  );
+  let contacts: ContactModel[];
+  if (excludeShared) {
+    contacts = await listContactsOwnedByIdDatabase(user.id);
+  } else {
+    contacts = await listContactsPermittedToUserIdDatabase(user.id);
+  }
   return NextResponse.json(contacts);
 });
 
