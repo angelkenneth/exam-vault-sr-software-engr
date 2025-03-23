@@ -1,13 +1,18 @@
 import type { MxOrigin } from '@/shared/network/mx-origin.ts'
 import type { ResponseSync } from '@/shared/data/response-sync.ts'
 
-export const invokeMx = async <TInput>(microservice: MxOrigin, path: string, input: TInput) => {
+export const invokeRestful = async <TInput>(
+  microservice: MxOrigin,
+  path: string,
+  method: string,
+  input: TInput,
+) => {
   const url = new URL(microservice)
   url.pathname = path
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
   const request = new Request(url, {
-    method: 'POST',
+    method,
     body: JSON.stringify(input),
     headers,
     credentials: 'include',
@@ -30,3 +35,6 @@ export const invokeMx = async <TInput>(microservice: MxOrigin, path: string, inp
     return responseSync
   })
 }
+
+export const invokePostOnly = async <TInput>(microservice: MxOrigin, path: string, input: TInput) =>
+  invokeRestful(microservice, path, 'POST', input)
