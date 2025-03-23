@@ -10,9 +10,12 @@ const { data: user } = useGetMeQuery()
   <nav>
     <RouterLink to="/">Home</RouterLink>
     <span>|</span>
-    <a :href="MxOrigin.authFe">
-      {{ user ? 'Sign Out' : 'Sign In' }}
-    </a>
+    <template v-if="user">
+      <a :href="MxOrigin.authFe + '/sign-out'">Sign Out</a>
+    </template>
+    <template v-else>
+      <a :href="MxOrigin.authFe + '/sign-in'">Sign In</a>
+    </template>
   </nav>
 </template>
 
