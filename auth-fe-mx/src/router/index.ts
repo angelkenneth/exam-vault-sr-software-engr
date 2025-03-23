@@ -19,6 +19,11 @@ const router = createRouter({
       name: 'sign-in',
       component: () => import('../users/presentation/SignInView.vue'),
     },
+    {
+      path: '/sign-out',
+      name: 'sign-out',
+      redirect: '/',
+    }
   ],
 })
 
