@@ -19,7 +19,7 @@ const tryToSignOut = () => {
   }
   isSigningOut.value = true
   tryToSignOutNetwork()
-    .then(cond([when200(() => router.push('/sign-in'))]))
+    .then(cond([when200(() => router.push({ name: 'sign-in' }))]))
     .finally(() => {
       isSigningOut.value = false
     })
@@ -39,7 +39,7 @@ const tryToGetMe = () => {
         when401(() => {
           publicUser.value = null
           setTimeout(() => {
-            router.push('/sign-in')
+            router.push({ name: 'sign-in' })
           }, 2000)
         }),
       ]),

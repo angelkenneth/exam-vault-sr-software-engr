@@ -16,7 +16,7 @@ const passwordError = ref('')
 const isRegisteringIn = ref(false)
 
 const redirectToProfile = () => {
-  router.push('/profile')
+  router.push({ name: 'profile' })
 }
 
 const tryToRegister = () => {
