@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ListView from '@/contacts/presentation/ListView.vue'
 import SessionGuard from '@/session/presentation/SessionGuard.vue'
 
 const router = createRouter({
@@ -13,7 +12,22 @@ const router = createRouter({
         {
           path: '/',
           name: 'contact-list',
-          component: ListView,
+          component: () => import('@/contacts/presentation/ListView.vue'),
+        },
+        {
+          path: '/create',
+          name: 'contact-create',
+          component: () => import('@/contacts/presentation/CreateView.vue'),
+        },
+        {
+          path: '/:contactId',
+          name: 'contact-detail',
+          component: () => import('@/contacts/presentation/DetailView.vue'),
+        },
+        {
+          path: '/:contactId/update',
+          name: 'contact-update',
+          component: () => import('@/contacts/presentation/UpdateView.vue'),
         },
       ],
     },

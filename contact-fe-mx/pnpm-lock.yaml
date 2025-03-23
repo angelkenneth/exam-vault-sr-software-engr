@@ -14,6 +14,9 @@ dependencies:
   ramda:
     specifier: ^0.30.1
     version: 0.30.1
+  vee-validate:
+    specifier: ^4.15.0
+    version: 4.15.0(vue@3.5.13)
   vue:
     specifier: ^3.5.13
     version: 3.5.13(typescript@5.7.3)
@@ -3309,6 +3312,11 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
+  /type-fest@4.37.0:
+    resolution: {integrity: sha512-S/5/0kFftkq27FPNye0XM1e2NsnoD/3FS+pBmbjmmtLT6I+i344KoOf7pvXreaFsDamWeaJX55nczA1m5PsBDg==}
+    engines: {node: '>=16'}
+    dev: false
+
   /types-ramda@0.30.1:
     resolution: {integrity: sha512-1HTsf5/QVRmLzcGfldPFvkVsAdi1db1BBKzi7iW3KBUlOICg/nKnFS+jGqDJS3YD8VsWbAh7JiHeBvbsw8RPxA==}
     dependencies:
@@ -3370,6 +3378,16 @@ packages:
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
+
+  /vee-validate@4.15.0(vue@3.5.13):
+    resolution: {integrity: sha512-PGJh1QCFwCBjbHu5aN6vB8macYVWrajbDvgo1Y/8fz9n/RVIkLmZCJDpUgu7+mUmCOPMxeyq7vXUOhbwAqdXcA==}
+    peerDependencies:
+      vue: ^3.4.26
+    dependencies:
+      '@vue/devtools-api': 7.7.2
+      type-fest: 4.37.0
+      vue: 3.5.13(typescript@5.7.3)
+    dev: false
 
   /vite-hot-client@0.2.4(vite@6.2.2):
     resolution: {integrity: sha512-a1nzURqO7DDmnXqabFOliz908FRmIppkBKsJthS8rbe8hBEXwEwe4C3Pp33Z1JoFCYfVL4kTOMLKk0ZZxREIeA==}
