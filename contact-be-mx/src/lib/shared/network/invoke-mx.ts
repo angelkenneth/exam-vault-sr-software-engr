@@ -1,11 +1,11 @@
-import { BeMx } from '@/lib/shared/network/mx-index';
+import { MxOrigin } from '@/lib/shared/network/mx-origin';
 import { ResponseSync } from '@/lib/shared/entity/response-sync';
 import { curryN } from 'ramda';
 import { InvokeMx } from '@/lib/shared/network/invoke-mx.shape';
 
 export const invokeMx: InvokeMx = curryN(
   3,
-  async <TInput>(microservice: BeMx, path: string, input: TInput) => {
+  async <TInput>(microservice: MxOrigin, path: string, input: TInput) => {
     const url = new URL(microservice);
     url.pathname = path;
     const headers = new Headers();
