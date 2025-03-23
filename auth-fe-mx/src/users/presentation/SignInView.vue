@@ -16,7 +16,13 @@ const passwordError = ref('')
 const isSigningIn = ref(false)
 
 const redirectToProfile = () => {
-  router.push({ name: 'profile' })
+  const currentUrl = new URL(window.location.href)
+  const redirectUri = currentUrl.searchParams.get('redirect_uri')
+  if (redirectUri) {
+    window.location.href = redirectUri
+  } else {
+    router.push({ name: 'profile' })
+  }
 }
 
 const tryToSignIn = () => {

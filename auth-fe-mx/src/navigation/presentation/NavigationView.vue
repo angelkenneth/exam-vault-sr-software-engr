@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import { MxOrigin } from '@/shared/network/mx-origin.ts'
 </script>
 
 <template>
@@ -9,6 +10,8 @@ import { RouterLink } from 'vue-router'
     <RouterLink to="/register">Register</RouterLink>
     <span>|</span>
     <RouterLink to="/sign-in">Sign In</RouterLink>
+    <span>|</span>
+    <a :href="MxOrigin.contactFe">Contacts</a>
   </nav>
 </template>
 
