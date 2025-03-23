@@ -79,10 +79,7 @@
       "indexes": {
         "permission_table_contactId_sharedToId_unique": {
           "name": "permission_table_contactId_sharedToId_unique",
-          "columns": [
-            "contactId",
-            "sharedToId"
-          ],
+          "columns": ["contactId", "sharedToId"],
           "isUnique": true
         }
       },
@@ -91,12 +88,8 @@
           "name": "permission_table_contactId_contact_table_id_fk",
           "tableFrom": "permission_table",
           "tableTo": "contact_table",
-          "columnsFrom": [
-            "contactId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["contactId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
