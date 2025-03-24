@@ -53,6 +53,8 @@ const doSubmit = handleSubmit.withControlled(doMutate)
       <button type="submit" :disabled="disabled">
         {{ isPending ? 'Creating...' : 'Create' }}
       </button>
+      &nbsp;
+      <RouterLink :to="{ name: 'contact-list' }">Cancel</RouterLink>
     </div>
   </form>
 </template>
