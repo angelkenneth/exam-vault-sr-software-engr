@@ -14,3 +14,5 @@ export interface GenericUserInput {
   username: string;
   password: string;
 }
+
+export type GetByUsernameInput = Pick<User, 'username'>;
