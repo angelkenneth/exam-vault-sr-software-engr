@@ -30,7 +30,7 @@ const doMutate = () => {
 </script>
 
 <template>
-  <button class="link" @click="doMutate">
+  <button class="link" @click="doMutate" :title="isPending ? 'Deleting...' : 'Delete'">
     {{ isPending ? '⏳' : '🗑️' }}
   </button>
 </template>
