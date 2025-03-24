@@ -1,4 +1,4 @@
-export interface ResponseSync<TOutput> extends Response {
+export interface ResponseSync extends Response {
   isJson: boolean;
-  jsonSync: () => TOutput;
+  jsonSync: <TOutput>() => TOutput;
 }

@@ -29,6 +29,31 @@ const router = createRouter({
           name: 'contact-update',
           component: () => import('@/contacts/presentation/UpdateView.vue'),
         },
+        {
+          path: '/:contactId/permissions',
+          children: [
+            {
+              path: '',
+              name: 'permission-list',
+              component: () => import('@/permissions/presentation/ListView.vue'),
+            },
+            {
+              path: 'create',
+              name: 'permission-create',
+              component: () => import('@/permissions/presentation/CreateView.vue'),
+            },
+            {
+              path: ':permissionId',
+              name: 'permission-detail',
+              component: () => import('@/permissions/presentation/DetailView.vue'),
+            },
+            {
+              path: ':permissionId/update',
+              name: 'permission-update',
+              component: () => import('@/permissions/presentation/UpdateView.vue'),
+            },
+          ],
+        },
       ],
     },
   ],

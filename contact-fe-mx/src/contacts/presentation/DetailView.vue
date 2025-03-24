@@ -14,15 +14,22 @@ const refetchIfIdle = refetchIfIdleFn({ isFetching, refetch })
   <h1>
     {{ contactId }}.
     {{ contact ? contact.mobileNumberE164 : 'Loading...' }}
-    <button class="link" @click="refetchIfIdle">
+    <button class="link" @click="refetchIfIdle" :title="isFetching ? 'Refreshing...' : 'Refresh'">
       {{ isFetching ? '⏳' : '🔄' }}
     </button>
     <DeleteButton />
     <router-link :to="{ name: 'contact-update', params: { contactId: contactId } }">
-      <button class="link" @click="refetchIfIdle">✏️</button>
+      <button class="link" @click="refetchIfIdle" title="Update">✏️</button>
+    </router-link>
+    <router-link :to="{ name: 'permission-list', params: { contactId: contactId } }">
+      <button class="link share" title="Sharing">↩️</button>
     </router-link>
   </h1>
-  <pre>{{ JSON.stringify(contact) }}</pre>
+  <pre>{{ JSON.stringify(contact, null, 2) }}</pre>
 </template>
 
-<style scoped></style>
+<style scoped>
+.share {
+  rotate: 180deg;
+}
+</style>

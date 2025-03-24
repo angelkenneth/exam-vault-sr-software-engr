@@ -8,7 +8,7 @@ const { data: user } = useGetMeQuery()
 
 <template>
   <nav>
-    <RouterLink to="/">Home</RouterLink>
+    <RouterLink to="/">Contacts</RouterLink>
     <span>|</span>
     <template v-if="user">
       <a :href="MxOrigin.authFe + '/sign-out'">Sign Out</a>

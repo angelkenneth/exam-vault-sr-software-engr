@@ -55,13 +55,13 @@ export const PATCH = wrapHandler<GetPermissionByIdInput, UpdatePermissionInput>(
       permissionId
     );
     if (!isOwned) {
-      const updatedPermission = await updatePermissionDatabase(
-        permissionId,
-        input
-      );
-      return NextResponse.json(updatedPermission);
+      return zodForbidden({ permissionId: 'You are not allowed to update' });
     }
-    return zodForbidden({ permissionId: 'You are not allowed to update' });
+    const updatedPermission = await updatePermissionDatabase(
+      permissionId,
+      input
+    );
+    return NextResponse.json(updatedPermission);
   }
 );
 
@@ -78,11 +78,11 @@ export const DELETE = wrapHandler<
     user.id,
     permissionId
   );
-  if (isOwned) {
-    await deletePermissionDatabase(permissionId);
-    return NextResponse.json({ permissionId: 'Deleted' });
+  if (!isOwned) {
+    return zodForbidden({
+      permissionId: 'Can only delete own permission, or it does not exist',
+    });
   }
-  return zodForbidden({
-    permissionId: 'Can only delete own permission, or it does not exist',
-  });
+  await deletePermissionDatabase(permissionId);
+  return NextResponse.json({ permissionId: 'Deleted' });
 });

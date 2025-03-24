@@ -5,12 +5,17 @@ import { dataOrThrow } from '@/lib/shared/local/data-or-throw';
 import { userFromSession } from '@/app/auth/_network/user-from-session';
 import { createPermissionDatabase } from '@/app/permissions/_database/create-permission';
 import { createPermissionInputSchema } from '@/app/permissions/_validation/create-permission-input';
-import { CreatePermissionInput } from '@/app/permissions/_entity/create-permission-input';
+import {
+  CreatePermissionApiInput,
+  CreatePermissionDatabaseInput,
+} from '@/app/permissions/_entity/create-permission-input';
 import { PermissionModel } from '@/app/permissions/_entity/permission';
 import { EmptyShape } from '@/lib/shared/entity/empty';
 import { listPermissionsRelatedToUserByIdDatabase } from '@/app/permissions/_database/list-permissions-by-owner-id';
 import { isContactOwnedByUserId } from '@/app/contacts/_database/get-contact-by-id';
-import { zodForbidden } from '@/lib/shared/local/to-zod-error';
+import { zodForbidden, zodNotFound } from '@/lib/shared/local/to-zod-error';
+import { getUserByUsernameNetwork } from '@/app/auth/_network/get-by-username';
+import { omit } from 'ramda';
 
 export const GET = wrapHandler<EmptyShape, PermissionModel[]>(
   async (request) => {
@@ -20,20 +25,35 @@ export const GET = wrapHandler<EmptyShape, PermissionModel[]>(
   }
 );
 
-export const POST = wrapHandler<CreatePermissionInput, PermissionModel>(
+export const POST = wrapHandler<CreatePermissionApiInput, PermissionModel>(
   async (request) => {
     const user = await userFromSession(request);
-    const input = dataOrThrow(
+    let input = dataOrThrow(
       createPermissionInputSchema,
-      await getJson<CreatePermissionInput>(request)
+      await getJson<CreatePermissionApiInput>(request)
     );
-    const isOwned = await isContactOwnedByUserId(input.contactId, user.id);
+    let sharedToId = input.sharedToId;
+    if (!sharedToId && input.sharedToUsername) {
+      const user = await getUserByUsernameNetwork({
+        username: input.sharedToUsername,
+      });
+      if (!user) {
+        return zodNotFound({
+          sharedToUsername: 'User with username not found',
+        });
+      }
+      sharedToId = user.id;
+      input = omit(['sharedToUsername'], { ...input, sharedToId });
+    }
+    const isOwned = await isContactOwnedByUserId(user.id, input.contactId);
     if (!isOwned) {
       return zodForbidden({
         contactId: 'You can only create permission for your own contact',
       });
     }
-    const permission = await createPermissionDatabase(input);
+    const permission = await createPermissionDatabase(
+      input as CreatePermissionDatabaseInput
+    );
     return NextResponse.json(permission, { status: 201 });
   }
 );

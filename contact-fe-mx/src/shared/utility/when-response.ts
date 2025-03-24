@@ -27,6 +27,7 @@ export const is200 = propEq(200, 'status')
 export const is201 = propEq(201, 'status')
 export const is400 = propEq(400, 'status')
 export const is401 = propEq(401, 'status')
+export const is404 = propEq(404, 'status')
 
 export const wrapJsonAsInput =
   <TInput, TOutput = void>(if200JsonFn: (json: TInput) => TOutput | Promise<TOutput>) =>
@@ -40,3 +41,4 @@ export const when200Json: WhenJsonResponse = <TInput, TOutput = void>(
 export const when201 = whenResponse(is201)
 
 export const when401 = whenResponse(is401)
+export const when404 = whenResponse(is404)

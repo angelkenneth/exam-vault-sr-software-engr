@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { NextResponse } from 'next/server';
 
 export const dataOrThrow: DateOrThrow = <TShape>(
-  schema: z.ZodObject<z.ZodRawShape>,
+  schema: z.ZodType,
   input: TShape
 ): TShape => {
   const { error, data } = schema.safeParse(input);
@@ -13,10 +13,7 @@ export const dataOrThrow: DateOrThrow = <TShape>(
 };
 
 export interface DateOrThrow {
-  <TShape>(schema: z.ZodObject<z.ZodRawShape>, input: TShape): TShape;
+  <TShape>(schema: z.ZodType, input: TShape): TShape;
 
-  <TShape>(
-    schema: z.ZodObject<z.ZodRawShape>,
-    input: Record<string, string>
-  ): TShape;
+  <TShape>(schema: z.ZodType, input: Record<string, string>): TShape;
 }

@@ -2,29 +2,23 @@ import { MxOrigin } from '@/lib/shared/network/mx-origin';
 import { ResponseSync } from '@/lib/shared/entity/response-sync';
 
 export interface InvokeMx {
-  <TInput, TOutput>(
+  <TInput>(
     microservice: MxOrigin,
     path: string,
     input: TInput
-  ): Promise<ResponseSync<TOutput>>;
+  ): Promise<ResponseSync>;
 
-  <TInput, TOutput>(
-    microservice: MxOrigin,
-    path: string
-  ): InvokeMx1Input<TInput, TOutput>;
+  <TInput>(microservice: MxOrigin, path: string): InvokeMx1Input<TInput>;
 
   (microservice: MxOrigin): InvokeMx2Input;
 }
 
 export interface InvokeMx2Input {
-  <TInput, TOutput>(
-    path: string,
-    input: TInput
-  ): Promise<ResponseSync<TOutput>>;
+  <TInput>(path: string, input: TInput): Promise<ResponseSync>;
 
-  <TInput, TOutput>(path: string): InvokeMx1Input<TInput, TOutput>;
+  <TInput>(path: string): InvokeMx1Input<TInput>;
 }
 
-export interface InvokeMx1Input<TInput, TOutput> {
-  (input: TInput): Promise<ResponseSync<TOutput>>;
+export interface InvokeMx1Input<TInput> {
+  (input: TInput): Promise<ResponseSync>;
 }

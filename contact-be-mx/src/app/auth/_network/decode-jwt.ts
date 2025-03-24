@@ -6,13 +6,10 @@ import { JwtUserPayload } from '@/app/auth/_entity/user';
 import { NextResponse } from 'next/server';
 
 export const decodeJwtNetwork = pipe(
-  invokeMx<DecodeJwtInput, JwtUserPayload>(
-    MxOrigin.authBe,
-    '/users/decode-jwt'
-  ),
+  invokeMx<DecodeJwtInput>(MxOrigin.authBe, '/users/decode-jwt'),
   andThen((response) => {
     if (response.status === 200) {
-      return response.jsonSync();
+      return response.jsonSync() as JwtUserPayload;
     }
     // TODO figure out to just propagate the error, instead of fallback to empty
     const body = response.isJson ? response.jsonSync() : {};

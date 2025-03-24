@@ -16,8 +16,8 @@ export const invokeMx: InvokeMx = curryN(
       headers,
     });
     return fetch(request).then(
-      async <TOutput>(r2: Response): Promise<ResponseSync<TOutput>> => {
-        const responseSync = r2 as ResponseSync<TOutput>;
+      async <TOutput>(r2: Response): Promise<ResponseSync> => {
+        const responseSync = r2 as ResponseSync;
         let json: TOutput;
         try {
           json = await responseSync.json();
@@ -29,7 +29,7 @@ export const invokeMx: InvokeMx = curryN(
           return responseSync;
         }
         responseSync.isJson = true;
-        responseSync.jsonSync = () => json;
+        responseSync.jsonSync = (() => json) as ResponseSync['jsonSync'];
         return responseSync;
       }
     );

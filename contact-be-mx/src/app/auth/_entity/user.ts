@@ -9,3 +9,5 @@ export interface User {
 export type PublicUser = Omit<User, 'password'>;
 
 export type JwtUserPayload = PublicUser & JwtPayload;
+
+export type GetByUsernameInput = Pick<User, 'username'>;

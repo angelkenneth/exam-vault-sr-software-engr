@@ -1,4 +1,10 @@
-import { is400, isJson, whenResponse, wrapJsonAsInput } from '@/shared/utility/when-response.ts'
+import {
+  is400,
+  is404,
+  isJson,
+  whenResponse,
+  wrapJsonAsInput,
+} from '@/shared/utility/when-response.ts'
 import { allPass } from 'ramda'
 import type { ResponseSync } from '@/shared/data/response-sync.ts'
 import type { WhenZodError } from '@/shared/utility/when-zod-error.shape.ts'
@@ -14,3 +20,8 @@ export const whenZodError: WhenZodError = <TInput, TOutput = void>(
   ifZodErrorFn: (json: TInput) => TOutput | Promise<TOutput>,
 ) =>
   whenResponse(allPass([is400, isJson, isZodError]), wrapJsonAsInput<TInput, TOutput>(ifZodErrorFn))
+
+export const when404ZodError: WhenZodError = <TInput, TOutput = void>(
+  ifZodErrorFn: (json: TInput) => TOutput | Promise<TOutput>,
+) =>
+  whenResponse(allPass([is404, isJson, isZodError]), wrapJsonAsInput<TInput, TOutput>(ifZodErrorFn))
