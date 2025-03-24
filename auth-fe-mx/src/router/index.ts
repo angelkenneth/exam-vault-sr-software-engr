@@ -23,7 +23,12 @@ const router = createRouter({
       path: '/sign-out',
       name: 'sign-out',
       redirect: '/',
-    }
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: () => import('../components/presentation/TestView.vue'),
+    },
   ],
 })
 

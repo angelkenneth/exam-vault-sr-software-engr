@@ -14,8 +14,7 @@ const refetchIfIdle = refetchIfIdleFn({ isFetching, refetch })
     <RouterLink :to="{ name: 'contact-detail', params: { contactId: contactId } }">
       № {{ contactId }}
     </RouterLink>
-    &gt;
-    List of Permissions
+    &gt; List of Permissions
     <button class="link" @click="refetchIfIdle">
       {{ isFetching ? '⏳' : '🔄' }}
     </button>

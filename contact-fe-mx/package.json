@@ -7,12 +7,16 @@
     "dev": "vite --port 5002",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
-    "test:unit": "vitest",
+    "playwright:install": "playwright install",
+    "cqa": "run-s lint:fix format:fix type-check test:unit test:e2e",
+    "test:unit": "vitest run",
     "test:e2e": "playwright test",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
-    "lint": "eslint . --fix",
-    "format": "prettier --write src/"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --check .",
+    "format:fix": "prettier --check . || (prettier --write . && exit 1)"
   },
   "dependencies": {
     "@tanstack/vue-query": "^5.69.0",

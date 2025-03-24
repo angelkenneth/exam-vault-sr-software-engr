@@ -5,6 +5,18 @@
 1. NodeJS 18 (minimum)
 2. [pnpm](https://pnpm.io/installation)
 
+## TDLR
+
+```bash
+pnpm install
+
+pnpm run -r playwright:install
+
+pnpm run -r dev
+
+pnpm run -r --parallel cqa
+```
+
 ## Approach
 
 1. I decided to go with NextJs for the API
@@ -16,3 +28,7 @@
    1. But rest assured that I did not just blindly use them
    2. I understand it and it would have been the code that I would have wrote anyway
 3. Decide to make it a POST-only API and not a RESTful API
+
+## References
+
+1. [Create a monorepo using PNPM workspace](https://dev.to/vinomanick/create-a-monorepo-using-pnpm-workspace-1ebn)

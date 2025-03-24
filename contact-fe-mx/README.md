@@ -90,6 +90,6 @@ Vue.js - The Progressive JavaScript Framework
 ```
 
 ## References
- 
+
 1. [Creating React App using Vite and PNPM](https://medium.com/@sahu.jyotirmaya26/creating-react-app-using-vite-and-pnpm-746bb0f9a0c2)
 2. [Form Input Bindings](https://vuejs.org/guide/essentials/forms)
