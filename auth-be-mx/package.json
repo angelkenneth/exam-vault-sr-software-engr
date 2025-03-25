@@ -6,6 +6,7 @@
     "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start -p 3001",
+    "migrate": "pnpm exec drizzle-kit migrate",
     "cqa": "run-s lint:fix format:fix test",
     "lint": "next lint .",
     "lint:fix": "next lint . --fix",

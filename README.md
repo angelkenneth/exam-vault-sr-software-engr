@@ -9,8 +9,8 @@
 ## TDLR
 
 ```bash
-pnpm install
-
+pnpm install && \
+pnpm run -r migrate && \
 pnpm run -r playwright:install
 
 pnpm run -r dev
