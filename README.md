@@ -4,6 +4,7 @@
 
 1. NodeJS 18 (minimum)
 2. [pnpm](https://pnpm.io/installation)
+3. [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/)
 
 ## TDLR
 
@@ -13,6 +14,8 @@ pnpm install
 pnpm run -r playwright:install
 
 pnpm run -r dev
+
+docker compose up
 
 pnpm run -r --parallel cqa
 ```

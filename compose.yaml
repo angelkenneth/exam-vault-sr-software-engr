@@ -1,0 +1,15 @@
+services:
+  auth-fe-mx:
+    image: auth-fe-mx
+    build:
+      context: auth-fe-mx
+      dockerfile: Dockerfile
+    ports:
+      - "5001:80"
+  contact-fe-mx:
+    image: contact-fe-mx
+    build:
+      context: contact-fe-mx
+      dockerfile: Dockerfile
+    ports:
+      - "5002:80"
