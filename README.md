@@ -3,6 +3,8 @@
 To demonstrate my know-how in microservices architecture, NextJs, Vue and Docker,
 I created _ContactCircle_, which allows signed-in users to manage and shared their contacts with one another
 
+[C4 Model Diagrams](documentation/c4-model-final.pdf)
+
 ![Demonstration](documentation/contact-circle-demo.gif)
 
 ## Prerequisites
