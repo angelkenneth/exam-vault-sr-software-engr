@@ -1,4 +1,9 @@
-## Microservices using NextJs (API only) and Vue
+## Microservices using NextJs (API only), Vue and Docker
+
+To demonstrate my know-how in microservices architecture, NextJs, Vue and Docker,
+I created _ContactCircle_, which allows signed-in users to manage and shared their contacts with one another
+
+![Demonstration](documentation/contact-circle-demo.gif)
 
 ## Prerequisites
 
