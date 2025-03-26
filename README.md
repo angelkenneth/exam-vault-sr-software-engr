@@ -20,6 +20,51 @@ docker compose up
 pnpm run -r --parallel cqa
 ```
 
+## Setup
+
+1. `cd` into the project directory
+2. Install dependencies:
+
+   ```bash
+   pnpm install
+   ```
+
+3. Set up the SQLite3 databases for each microservice:
+
+   ```bash
+    pnpm run -r migrate
+    ```
+
+4. Optionally, install Playwright browsers:
+
+   ```bash
+   pnpm run -r playwright:install
+   ```
+
+## Running
+
+Access: [http://localhost:5001](http://localhost:5001)
+
+1. Run conventionally:
+
+   ```bash
+   pnpm run -r dev
+   ```
+   
+2. Or, run using Docker:
+
+   ```bash
+   docker compose up
+   ```
+
+## Code Quality Assurance
+
+To run all E2E tests, unit tests and linting:
+
+```bash
+pnpm run -r --parallel cqa
+```
+
 ## Approach
 
 1. I decided to go with NextJs for the API

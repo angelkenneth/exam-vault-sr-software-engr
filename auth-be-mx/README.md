@@ -12,9 +12,9 @@ pnpm format:fix && \
 pnpm test
 ```
 
-### Steps
+## Steps
 
-1. `cd` into the root directory
+1. `cd` into the project directory
 2. Install dependencies:
 
    ```bash
@@ -27,7 +27,17 @@ pnpm test
    pnpm exec drizzle-kit migrate
    ```
 
+## Running
+
+Access: [http://localhost:5001](http://localhost:5001)
+
+```bash
+pnpm dev
+```
+
 ## Database
+
+Reflecting schema changes:
 
 ```bash
 pnpm exec drizzle-kit generate
