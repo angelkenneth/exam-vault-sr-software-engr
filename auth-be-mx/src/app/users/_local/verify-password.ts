@@ -1,8 +1,14 @@
-import { compareSync } from 'bcrypt';
+import { scryptSync, timingSafeEqual } from "crypto";
 
+/**
+ * Ref: https://stackoverflow.com/a/67038052/912215
+ */
 export const verifyPassword = (
-  hashedPassword: string,
-  inputPassword: string
+  storedPassword: string,
+  suppliedPassword: string
 ): boolean => {
-  return compareSync(inputPassword, hashedPassword);
+  const [hashedPassword, salt] = storedPassword.split(".");
+  const hashedPasswordBuf = Buffer.from(hashedPassword, "hex");
+  const suppliedPasswordBuf = scryptSync(suppliedPassword, salt, 64);
+  return timingSafeEqual(hashedPasswordBuf, suppliedPasswordBuf);
 };

@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "@libsql/client": "^0.14.0",
-    "bcrypt": "^5.1.1",
     "drizzle-orm": "^0.40.0",
     "jsonwebtoken": "^9.0.2",
     "next": "15.2.1",
@@ -25,7 +24,6 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^20",
     "@types/ramda": "^0.30.2",
