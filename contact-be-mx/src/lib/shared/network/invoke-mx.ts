@@ -1,4 +1,4 @@
-import { MxOrigin } from '@/lib/shared/network/mx-origin';
+import { getOriginFromMx, MxOrigin } from '@/lib/shared/network/mx-origin';
 import { ResponseSync } from '@/lib/shared/entity/response-sync';
 import { curryN } from 'ramda';
 import { InvokeMx } from '@/lib/shared/network/invoke-mx.shape';
@@ -6,7 +6,7 @@ import { InvokeMx } from '@/lib/shared/network/invoke-mx.shape';
 export const invokeMx: InvokeMx = curryN(
   3,
   async <TInput>(microservice: MxOrigin, path: string, input: TInput) => {
-    const url = new URL(microservice);
+    const url = new URL(getOriginFromMx(microservice));
     url.pathname = path;
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');

@@ -55,3 +55,5 @@ pnpm create next-app@latest auth-be-mx --typescript --eslint --src-dir --turbopa
 12. [Vitest > Failed to load url resolved bug](https://github.com/vitest-dev/vitest/discussions/3042)
 13. [Zod validation for phone numbers](https://stackoverflow.com/a/78046054/912215)
 14. [6 SQL Joins you MUST know! (Animated + Practice)](https://youtu.be/Yh4CrPHVBdE)
+15. [Dockerize a Next.js App](https://medium.com/@itsuki.enjoy/dockerize-a-next-js-app-4b03021e084d)
+    1. Had issues, should be: [Dockerfile](https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile)

@@ -13,3 +13,21 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5002:80"
+  auth-be-mx:
+    image: auth-be-mx
+    build:
+      context: auth-be-mx
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./auth-be-mx/db.sqlite3:/app/db.sqlite3
+  contact-be-mx:
+    image: contact-be-mx
+    build:
+      context: contact-be-mx
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./contact-be-mx/db.sqlite3:/app/db.sqlite3

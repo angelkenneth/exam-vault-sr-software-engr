@@ -54,3 +54,5 @@ pnpm create next-app@latest auth-be-mx --typescript --eslint --src-dir --turbopa
 10. [NextJs > Middleware](https://nextjs.org/docs/pages/building-your-application/routing/middleware)
 11. [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
 12. [Vitest > Failed to load url resolved bug](https://github.com/vitest-dev/vitest/discussions/3042)
+13. [Dockerize a Next.js App](https://medium.com/@itsuki.enjoy/dockerize-a-next-js-app-4b03021e084d)
+    1. Had issues, should be: [Dockerfile](https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile)
