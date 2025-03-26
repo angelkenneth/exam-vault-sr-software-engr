@@ -35,3 +35,4 @@ pnpm run -r --parallel cqa
 ## References
 
 1. [Create a monorepo using PNPM workspace](https://dev.to/vinomanick/create-a-monorepo-using-pnpm-workspace-1ebn)
+2. [Dont remove old local browser](https://github.com/microsoft/playwright/issues/15990)
